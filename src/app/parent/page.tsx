@@ -1,6 +1,5 @@
 const ParentPage = () => {
-    return <div className="">ParentPage</div>;
-  };
-  
-  export default ParentPage;
-  
+  return <div className="">ParentPage</div>;
+};
+
+export default ParentPage;
