@@ -1,6 +1,43 @@
 import Pagination from "@/components/Pagination";
+import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import Image from "next/image";
+
+const columuns = [
+  {
+    header: "Info",
+    accessor: "Info",
+  },
+  {
+    header: "Teacher ID",
+    accessor: "teacherId",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Subjects",
+    accessor: "subjects",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Classes",
+    accessor: "classes",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Phone",
+    accessor: "phone",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Address",
+    accessor: "adress",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Actions",
+    accessor: "actions",
+  },
+];
 
 const TeacherListPage = () => {
   return (
@@ -26,9 +63,9 @@ const TeacherListPage = () => {
         </div>
       </div>
       {/* LIST */}
-      <div className=""></div>
+      <Table columns={columuns} />
       {/* PAGINATION */}
-      <Pagination/>
+      <Pagination />
     </div>
   );
 };
