@@ -3,12 +3,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import InputField from "../InputField";
 
 const schema = z.object({
   username: z
     .string()
-    .min(3, { message: "Username must be at least 3 characters lomg!" })
-    .max(20, { message: "Username must be at most 20 characters lomg!" }),
+    .min(3, { message: "Username must be at least 3 characters long!" })
+    .max(20, { message: "Username must be at most 20 characters long!" }),
   email: z.string().email({ message: "Invalid email address!" }),
   password: z
     .string()
@@ -22,6 +23,8 @@ const schema = z.object({
   img: z.instanceof(File, { message: "Image is required!" }),
 });
 
+type Inputs = z.infer<typeof schema>;
+
 const TeacherForm = ({
   type,
   data,
@@ -33,7 +36,7 @@ const TeacherForm = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(schema) });
+  } = useForm<Inputs>({ resolver: zodResolver(schema) });
 
   const onSubmit = handleSubmit((data) => {
     console.log(data);
@@ -45,19 +48,13 @@ const TeacherForm = ({
       <span className="text-xs text-gray-400 font-medium">
         Authentication Information
       </span>
-      <div className="flex flex-col gap-2 w-full md:w-1/4">
-        <label className="text-xs text-gray-500">Username</label>
-        <input
-          type="text"
-          {...register("username")}
-          className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
-        />
-        {errors.username?.message && (
-          <p className="text-xs text-red-500">
-            {errors.username?.message.toString()}
-          </p>
-        )}
-      </div>
+      <InputField
+        label={"Username"}
+        register={register}
+        name={"username"}
+        inputProps={data?.username}
+        error={errors?.username}
+      />
       <span className="text-xs text-gray-400 font-medium">
         Personal Information
       </span>
